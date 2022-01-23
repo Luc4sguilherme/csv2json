@@ -19,7 +19,12 @@ class Converter {
     const data = csv
       .split("\n")
       .filter((elem) => elem.length > 0)
-      .map((elem) => elem.replace(/"/g, "").split(","));
+      .map((elem) =>
+        elem
+          .replace(/"/g, "")
+          .split(",")
+          .map((elem) => elem.trim())
+      ); 
 
     return data;
   }
@@ -80,7 +85,7 @@ class Converter {
 
       return true;
     } catch (error) {
-      this.invalidJSONMessage(error)
+      this.invalidJSONMessage(error);
       return false;
     }
   }
@@ -100,9 +105,9 @@ class Converter {
 
   invalidJSONMessage(error) {
     if (error.message.includes("Unexpected end of JSON input")) {
-     alert("JSON is empty!");
+      alert("JSON is empty!");
     } else {
-     alert(`Invalid JSON! \n\n${error.message}`);
+      alert(`Invalid JSON! \n\n${error.message}`);
     }
   }
 
